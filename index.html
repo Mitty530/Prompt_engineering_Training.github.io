@@ -1,1 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Engineering Workshop Registration</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1>Prompt Engineering Workshop Registration</h1>
+    <form id="registrationForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br><br>
+        
+        <label for="experience">Experience Level:</label>
+        <select id="experience" required>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+        </select><br><br>
+        
+        <button type="submit">Register</button>
+    </form>
 
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const experience = document.getElementById('experience').value;
+            
+            // Generate PDF
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            doc.setFontSize(22);
+            doc.text("Prompt Engineering Workshop Handbook", 20, 20);
+            
+            doc.setFontSize(16);
+            doc.text(`Welcome, ${name}!`, 20, 40);
+            
+            doc.setFontSize(12);
+            doc.text("Workshop Overview:", 20, 60);
+            doc.text("1. Introduction to Prompt Engineering", 30, 70);
+            doc.text("2. Best Practices for Crafting Effective Prompts", 30, 80);
+            doc.text("3. Hands-on Exercises", 30, 90);
+            doc.text("4. Advanced Techniques for " + experience + " users", 30, 100);
+            
+            doc.text("Our Club's Vision:", 20, 120);
+            doc.text("To empower individuals with the skills to effectively", 20, 130);
+            doc.text("communicate with AI and unlock its full potential.", 20, 140);
+            
+            doc.text("Recommended Software:", 20, 160);
+            doc.text("- OpenAI's GPT Playground", 30, 170);
+            doc.text("- Anthropic's Claude", 30, 180);
+            doc.text("- Hugging Face's Transformer models", 30, 190);
+            
+            // Save the PDF
+            doc.save("PromptEngineeringHandbook.pdf");
+            
+            alert("Registration successful! Your personalized handbook has been downloaded.");
+        });
+    </script>
+</body>
+</html>
